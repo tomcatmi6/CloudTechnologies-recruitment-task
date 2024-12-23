@@ -1,24 +1,21 @@
-import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
+import StartPage from "./pages/StartPage";
+import AdvertisementsPage from "./pages/AdvertisementListPage";
+import AdvertisementOperationPage from "./pages/AdvertisementOperationPage";
+import { Container } from "@material-ui/core";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const App: React.FC = () => (
+  <Container maxWidth="xl" style={{ marginTop: "50px" }}>
+  <Router>
+    <Switch>
+      <Route exact path="/" component={StartPage} />
+      <Route exact path="/advertisements" component={AdvertisementsPage} />
+      <Route exact path="/advertisements/new" component={AdvertisementOperationPage} />
+    </Switch>
+  </Router>
+  </Container>
+);
 
 export default App;
