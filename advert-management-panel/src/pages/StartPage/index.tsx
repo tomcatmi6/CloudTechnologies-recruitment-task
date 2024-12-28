@@ -1,20 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Typography } from "@material-ui/core";
+import { Box, Button, Typography } from "@material-ui/core";
 import Quote from "../../components/Quote";
 
 const StartPage: React.FC = () => (
-  <div>
+  <Box>
     <Typography variant="h1" align="center" gutterBottom>
       Witamy na stronie
     </Typography>
     <Quote />
-    <div style={{ textAlign: "center", marginTop: "20px" }}>
+    <Box style={{ textAlign: "center", marginTop: "20px" }}>
       <Button variant="contained" color="primary" component={Link} to="/advertisements">
         Przejdź do reklam
       </Button>
-    </div>
-  </div>
+    </Box>
+  </Box>
 );
 
 export default StartPage;

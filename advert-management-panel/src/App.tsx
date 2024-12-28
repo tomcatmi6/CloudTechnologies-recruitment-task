@@ -7,7 +7,7 @@ import { Container } from "@material-ui/core";
 
 
 const App: React.FC = () => (
-  <Container maxWidth="xl" style={{ marginTop: "50px" }}>
+  <Container maxWidth="xl" style={{ marginTop: "50px" }} className="main-container">
   <Router>
     <Switch>
       <Route exact path="/" component={StartPage} />

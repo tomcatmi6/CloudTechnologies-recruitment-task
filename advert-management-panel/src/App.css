@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+body {
+  background-color: #eee;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -11,6 +15,14 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.quote-text {
+  font-size: 1.5em;
+  font-weight: 300;
+  color: #333;
+  margin: 0;
+  font-style: italic;
 }
 
 .App-header {

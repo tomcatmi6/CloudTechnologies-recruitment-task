@@ -15,7 +15,7 @@ interface Props {
 }
 
 const AdvertisementList: React.FC<Props> = ({ advertisements, onDelete }) => (
-  <div>
+  <>
     <Typography variant="h5" gutterBottom>Reklamy</Typography>
     <List>
       {advertisements.map((ad) => (
@@ -34,7 +34,7 @@ const AdvertisementList: React.FC<Props> = ({ advertisements, onDelete }) => (
         </ListItem>
       ))}
     </List>
-  </div>
+  </>
 );
 
 export default AdvertisementList;

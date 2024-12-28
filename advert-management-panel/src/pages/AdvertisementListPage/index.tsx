@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@material-ui/core";
+import { Button, Card } from "@material-ui/core";
 import AdvertisementList from "../../components/AdvertisementList";
 import { Link } from "react-router-dom";
 const AdvertisementsPage: React.FC = () => {
@@ -12,12 +12,12 @@ const AdvertisementsPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <Card >
       <AdvertisementList advertisements={advertisements} onDelete={handleDelete} />
       <Button variant="contained" color="primary" component={Link} to="/advertisements/new">
         Dodaj nową reklamę
       </Button>
-    </div>
+    </Card>
   );
 };
 
