@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/tomcatmi6/CloudTechnologies-recruitment-task/static/css/main.7f298ecc.css",
+    "main.js": "/tomcatmi6/CloudTechnologies-recruitment-task/static/js/main.640a81bc.js",
+    "index.html": "/tomcatmi6/CloudTechnologies-recruitment-task/index.html",
+    "main.7f298ecc.css.map": "/tomcatmi6/CloudTechnologies-recruitment-task/static/css/main.7f298ecc.css.map",
+    "main.640a81bc.js.map": "/tomcatmi6/CloudTechnologies-recruitment-task/static/js/main.640a81bc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7f298ecc.css",
+    "static/js/main.640a81bc.js"
+  ]
+}
