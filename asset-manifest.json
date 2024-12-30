@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/CloudTechnologies-recruitment-task/static/css/main.7f298ecc.css",
-    "main.js": "/CloudTechnologies-recruitment-task/static/js/main.640a81bc.js",
+    "main.js": "/CloudTechnologies-recruitment-task/static/js/main.fd92f3dc.js",
     "index.html": "/CloudTechnologies-recruitment-task/index.html",
     "main.7f298ecc.css.map": "/CloudTechnologies-recruitment-task/static/css/main.7f298ecc.css.map",
-    "main.640a81bc.js.map": "/CloudTechnologies-recruitment-task/static/js/main.640a81bc.js.map"
+    "main.fd92f3dc.js.map": "/CloudTechnologies-recruitment-task/static/js/main.fd92f3dc.js.map"
   },
   "entrypoints": [
     "static/css/main.7f298ecc.css",
-    "static/js/main.640a81bc.js"
+    "static/js/main.fd92f3dc.js"
   ]
 }
