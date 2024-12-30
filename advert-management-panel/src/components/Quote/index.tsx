@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  Typography,
-  CircularProgress,
-  Card,
-  CardContent,
-} from "@mui/material";
+import { Typography, CircularProgress, Card, CardContent } from "@mui/material";
 
 const Quote: React.FC = () => {
   type QuoteType = {

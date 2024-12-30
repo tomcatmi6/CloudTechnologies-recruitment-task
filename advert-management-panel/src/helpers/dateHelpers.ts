@@ -3,4 +3,9 @@ const changeISODateToReadable = (date: string) => {
   return dateObj.toLocaleDateString();
 };
 
-export { changeISODateToReadable };
+const changeISODateTOyyyyMMdd = (date?: string) => {
+  const dateObj = date ? new Date(date) : new Date();
+  return dateObj.toISOString().split("T")[0];
+};
+
+export { changeISODateToReadable, changeISODateTOyyyyMMdd };

@@ -10,7 +10,12 @@ const StartPage: React.FC = () => (
     </Typography>
     <Quote />
     <Box sx={{ textAlign: "center", mt: 6 }}>
-      <Button variant="contained" color="primary" component={Link} to="/advertisements">
+      <Button
+        variant="contained"
+        color="primary"
+        component={Link}
+        to="/advertisements"
+      >
         Przejdź do panelu zarządzania reklamami
       </Button>
     </Box>

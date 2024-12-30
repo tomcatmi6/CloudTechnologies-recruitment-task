@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Card,
@@ -11,7 +12,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
 import { useFormik } from "formik";
-import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 
@@ -25,7 +25,9 @@ export interface Advertisement {
 
 interface Props {
   onAdd: (ad: Advertisement) => void;
+  advertisementToEdit?: Advertisement | null;
   currentAdvertisements: Advertisement[];
+  onUpdate?: (ad: Advertisement) => void;
 }
 
 const validationSchema = yup.object({
@@ -53,8 +55,26 @@ const validationSchema = yup.object({
 
 const AdvertisementForm: React.FC<Props> = ({
   onAdd,
+  advertisementToEdit,
   currentAdvertisements,
+  onUpdate,
 }) => {
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  useEffect(() => {
+    if (advertisementToEdit) {
+      formik.setValues({
+        name: advertisementToEdit.name,
+        content: advertisementToEdit.content,
+        startDate: dayjs(advertisementToEdit.startDate),
+        endDate: dayjs(advertisementToEdit.endDate),
+      });
+      setIsEditMode(true);
+    } else {
+      setIsEditMode(false);
+    }
+  }, [advertisementToEdit]);
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -67,7 +87,7 @@ const AdvertisementForm: React.FC<Props> = ({
       if (!formik.isValid || !values.startDate || !values.endDate) return;
 
       const newAdvertisement: Advertisement = {
-        id: uuidv4(),
+        id: advertisementToEdit ? advertisementToEdit.id : uuidv4(),
         name: values.name,
         content: values.content,
         startDate: values.startDate?.toISOString(),
@@ -75,7 +95,9 @@ const AdvertisementForm: React.FC<Props> = ({
       };
 
       const isNameTaken = currentAdvertisements.some(
-        (ad) => ad.name === newAdvertisement.name.trim()
+        (ad) =>
+          ad.name === newAdvertisement.name.trim() &&
+          ad.id !== newAdvertisement.id
       );
 
       if (isNameTaken) {
@@ -83,8 +105,14 @@ const AdvertisementForm: React.FC<Props> = ({
         return;
       }
 
-      onAdd(newAdvertisement);
+      if (isEditMode && onUpdate) {
+        onUpdate(newAdvertisement);
+      } else {
+        onAdd(newAdvertisement);
+      }
+
       formik.resetForm();
+      setIsEditMode(false);
     },
   });
 
@@ -92,7 +120,7 @@ const AdvertisementForm: React.FC<Props> = ({
     <Card sx={{ maxWidth: 345, padding: 2 }}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <CardHeader
-          title="Dodaj nową reklamę"
+          title={isEditMode ? "Edytuj reklamę" : "Dodaj nową reklamę"}
           titleTypographyProps={{ component: "h2" }}
         />
         <CardContent>
@@ -160,7 +188,7 @@ const AdvertisementForm: React.FC<Props> = ({
             />
           </form>
         </CardContent>
-        <CardActions sx={{ justifyContent: "center" }}>
+        <CardActions sx={{ justifyContent: "center", gap: 2 }}>
           <Button
             variant="contained"
             form="advertisement-form"
@@ -169,7 +197,7 @@ const AdvertisementForm: React.FC<Props> = ({
             type="submit"
             sx={{ mt: 2 }}
           >
-            Dodaj
+            {isEditMode ? "Zapisz zmiany" : "Dodaj"}
           </Button>
         </CardActions>
       </LocalizationProvider>

@@ -1,6 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Typography, Button, Card, CardHeader, CardContent, CardActions } from "@mui/material";
+import {
+  Typography,
+  Button,
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+} from "@mui/material";
 
 const ErrorPage: React.FC = () => (
   <Card
@@ -12,16 +19,17 @@ const ErrorPage: React.FC = () => (
       minHeight: "50vh",
     }}
   >
-    <CardHeader title="Błąd autentykacji" titleTypographyProps={{ component: 'h1' }}/>
+    <CardHeader
+      title="Błąd autentykacji"
+      titleTypographyProps={{ component: "h1" }}
+    />
     <CardContent>
-    <Typography gutterBottom>
-      Nie masz dostępu do tej strony
-    </Typography>
+      <Typography gutterBottom>Nie masz dostępu do tej strony</Typography>
     </CardContent>
     <CardActions>
-    <Button variant="contained" color="primary" component={Link} to="/">
-      Wróć na stronę główną
-    </Button>
+      <Button variant="contained" color="primary" component={Link} to="/">
+        Wróć na stronę główną
+      </Button>
     </CardActions>
   </Card>
 );
