@@ -1,13 +1,7 @@
 import React from "react";
-import { Typography, List, ListItem, ListItemText, Button } from "@material-ui/core";
-
-interface Advertisement {
-  id: string;
-  name: string;
-  content: string;
-  startDate: string;
-  endDate: string;
-}
+import { List, ListItem, ListItemText, Button } from "@mui/material";
+import { Advertisement } from "../AdvertisementForm";
+import { changeISODateToReadable } from "../../helpers/dateHelpers";
 
 interface Props {
   advertisements: Advertisement[];
@@ -15,18 +9,16 @@ interface Props {
 }
 
 const AdvertisementList: React.FC<Props> = ({ advertisements, onDelete }) => (
-  <>
-    <Typography variant="h5" gutterBottom>Reklamy</Typography>
     <List>
       {advertisements.map((ad) => (
         <ListItem key={ad.id}>
           <ListItemText
             primary={ad.name}
-            secondary={`Start: ${ad.startDate}, End: ${ad.endDate}`}
+            secondary={`Start: ${changeISODateToReadable(ad.startDate)}, End: ${changeISODateToReadable(ad.endDate)}`}
           />
           <Button
             variant="contained"
-            color="secondary"
+            color="error"
             onClick={() => onDelete(ad.id)}
           >
             Usuń
@@ -34,7 +26,6 @@ const AdvertisementList: React.FC<Props> = ({ advertisements, onDelete }) => (
         </ListItem>
       ))}
     </List>
-  </>
 );
 
 export default AdvertisementList;

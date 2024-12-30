@@ -1,20 +1,23 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
 import StartPage from "./pages/StartPage";
 import AdvertisementsPage from "./pages/AdvertisementListPage";
-import AdvertisementOperationPage from "./pages/AdvertisementOperationPage";
-import { Container } from "@material-ui/core";
-
+import NewAdvertisementPage from "./pages/NewAdvertisementPage";
+import { Container } from "@mui/material";
 
 const App: React.FC = () => (
-  <Container maxWidth="xl" style={{ marginTop: "50px" }} className="main-container">
-  <Router>
-    <Switch>
-      <Route exact path="/" component={StartPage} />
-      <Route exact path="/advertisements" component={AdvertisementsPage} />
-      <Route exact path="/advertisements/new" component={AdvertisementOperationPage} />
-    </Switch>
-  </Router>
+  <Container
+    maxWidth="xl"
+    style={{ marginTop: "50px" }}
+    className="main-container"
+  >
+    <Router>
+      <Routes>
+        <Route path="/" element={<StartPage />} />
+        <Route path="/advertisements" element={<AdvertisementsPage />} />
+        <Route path="/advertisements/new" element={<NewAdvertisementPage />} />
+      </Routes>
+    </Router>
   </Container>
 );
 

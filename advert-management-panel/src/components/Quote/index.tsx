@@ -5,7 +5,7 @@ import {
   CircularProgress,
   Card,
   CardContent,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const Quote: React.FC = () => {
   type QuoteType = {
@@ -35,7 +35,9 @@ const Quote: React.FC = () => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h2" align="center" className="quote-text">{`"${quote?.quote}"`}</Typography>
+        <Typography variant="h2" align="center" className="quote-text">
+          {`"${quote?.quote}"`}
+        </Typography>
         <Typography align="right">{`Author: ${quote?.author}`}</Typography>
       </CardContent>
     </Card>
