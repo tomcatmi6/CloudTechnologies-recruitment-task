@@ -4,7 +4,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  TextField
+  TextField,
 } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -25,6 +25,7 @@ export interface Advertisement {
 
 interface Props {
   onAdd: (ad: Advertisement) => void;
+  currentAdvertisements: Advertisement[];
 }
 
 const validationSchema = yup.object({
@@ -37,7 +38,10 @@ const validationSchema = yup.object({
   startDate: yup
     .date()
     .required("Data rozpoczęcia jest wymagana.")
-    .min(dayjs().startOf('day').toDate(), "Data rozpoczęcia nie może być z przeszłości."),
+    .min(
+      dayjs().startOf("day").toDate(),
+      "Data rozpoczęcia nie może być z przeszłości."
+    ),
   endDate: yup
     .date()
     .required("Data zakończenia jest wymagana.")
@@ -47,7 +51,10 @@ const validationSchema = yup.object({
     ),
 });
 
-const AdvertisementForm: React.FC<Props> = ({onAdd}) => {
+const AdvertisementForm: React.FC<Props> = ({
+  onAdd,
+  currentAdvertisements,
+}) => {
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -58,8 +65,8 @@ const AdvertisementForm: React.FC<Props> = ({onAdd}) => {
     validationSchema,
     onSubmit: (values) => {
       if (!formik.isValid || !values.startDate || !values.endDate) return;
-      
-      const newAd: Advertisement = {
+
+      const newAdvertisement: Advertisement = {
         id: uuidv4(),
         name: values.name,
         content: values.content,
@@ -67,89 +74,107 @@ const AdvertisementForm: React.FC<Props> = ({onAdd}) => {
         endDate: values.endDate?.toISOString(),
       };
 
-      onAdd(newAd);
+      const isNameTaken = currentAdvertisements.some(
+        (ad) => ad.name === newAdvertisement.name.trim()
+      );
+
+      if (isNameTaken) {
+        alert("Reklama o tej nazwie już istnieje. Wybierz inną nazwę.");
+        return;
+      }
+
+      onAdd(newAdvertisement);
       formik.resetForm();
     },
   });
 
   return (
-      <Card sx={{ maxWidth: 345, padding: 2 }}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <CardHeader title="Dodaj nową reklamę" titleTypographyProps={{ component: 'h2' }} />
-          <CardContent>
-            <form id="advertisement-form" onSubmit={formik.handleSubmit}>
-              <TextField
-                label="Nazwa"
-                name="name"
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.name && Boolean(formik.errors.name)}
-                helperText={formik.touched.name && formik.errors.name}
-                fullWidth
-                autoFocus
-                margin="normal"
-              />
-              <TextField
-                label="Treść"
-                name="content"
-                value={formik.values.content}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.content && Boolean(formik.errors.content)}
-                helperText={formik.touched.content && formik.errors.content}
-                fullWidth
-                margin="normal"
-                multiline
-                rows={3}
-              />
-              <DatePicker
-                label="Data rozpoczęcia"
-                value={formik.values.startDate}
-                onChange={(newValue) => formik.setFieldValue("startDate", newValue)}
-                format="DD-MM-YYYY"
-                slotProps={{
-                  textField: {
-                    error: formik.touched.startDate && Boolean(formik.errors.startDate),
-                    helperText: formik.touched.startDate && formik.errors.startDate,
-                    fullWidth: true,
-                    margin: "normal",
-                  },
-                }}
-                minDate={dayjs()}
-              />
-              <DatePicker
-                label="Data zakończenia"
-                value={formik.values.endDate}
-                onChange={(newValue) => formik.setFieldValue("endDate", newValue)}
-                format="DD-MM-YYYY"
-                slotProps={{
-                  textField: {
-                    error: formik.touched.endDate && Boolean(formik.errors.endDate),
-                    helperText: formik.touched.endDate && formik.errors.endDate,
-                    fullWidth: true,
-                    margin: "normal",
-                  },
-                }}
-                minDate={formik.values.startDate || dayjs()}
-              />
-            </form>
-          </CardContent>
-          <CardActions sx={{ justifyContent: "center" }}>
-            <Button
-              variant="contained"
-              form="advertisement-form"
-              color="primary"
-              disabled={!formik.isValid}
-              type="submit"
-              sx={{ mt: 2 }}
-            >
-              Dodaj
-            </Button>
-          </CardActions>
-        </LocalizationProvider>
-      </Card>
-  )
+    <Card sx={{ maxWidth: 345, padding: 2 }}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <CardHeader
+          title="Dodaj nową reklamę"
+          titleTypographyProps={{ component: "h2" }}
+        />
+        <CardContent>
+          <form id="advertisement-form" onSubmit={formik.handleSubmit}>
+            <TextField
+              label="Nazwa"
+              name="name"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
+              fullWidth
+              autoFocus
+              margin="normal"
+            />
+            <TextField
+              label="Treść"
+              name="content"
+              value={formik.values.content}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.content && Boolean(formik.errors.content)}
+              helperText={formik.touched.content && formik.errors.content}
+              fullWidth
+              margin="normal"
+              multiline
+              rows={3}
+            />
+            <DatePicker
+              label="Data rozpoczęcia"
+              value={formik.values.startDate}
+              onChange={(newValue) =>
+                formik.setFieldValue("startDate", newValue)
+              }
+              format="DD-MM-YYYY"
+              slotProps={{
+                textField: {
+                  error:
+                    formik.touched.startDate &&
+                    Boolean(formik.errors.startDate),
+                  helperText:
+                    formik.touched.startDate && formik.errors.startDate,
+                  fullWidth: true,
+                  margin: "normal",
+                },
+              }}
+              minDate={dayjs()}
+            />
+            <DatePicker
+              label="Data zakończenia"
+              value={formik.values.endDate}
+              onChange={(newValue) => formik.setFieldValue("endDate", newValue)}
+              format="DD-MM-YYYY"
+              slotProps={{
+                textField: {
+                  error:
+                    formik.touched.endDate && Boolean(formik.errors.endDate),
+                  helperText: formik.touched.endDate && formik.errors.endDate,
+                  fullWidth: true,
+                  margin: "normal",
+                },
+              }}
+              minDate={formik.values.startDate || dayjs()}
+            />
+          </form>
+        </CardContent>
+        <CardActions sx={{ justifyContent: "center" }}>
+          <Button
+            variant="contained"
+            form="advertisement-form"
+            color="primary"
+            disabled={!formik.isValid}
+            type="submit"
+            sx={{ mt: 2 }}
+          >
+            Dodaj
+          </Button>
+        </CardActions>
+      </LocalizationProvider>
+    </Card>
+  );
 };
 
 export default AdvertisementForm;

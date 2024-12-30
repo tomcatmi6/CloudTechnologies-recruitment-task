@@ -54,9 +54,44 @@ const AdvertisementsPage: React.FC = () => {
     );
   };
 
+  const loadSampleData = () => {
+    const exampleAdvertisements: Advertisement[] = [
+      {
+        id: "1",
+        name: "Reklama 1",
+        content: "Przykładowa treść reklamy",
+        startDate: "2024-01-01",
+        endDate: "2024-12-31",
+      },
+      {
+        id: "2",
+        name: "Reklama 2",
+        content: "Inna przykładowa treść reklamy",
+        startDate: "2024-02-01",
+        endDate: "2024-12-31",
+      },
+      {
+        id: "3",
+        name: "Reklama 3",
+        content: "Inna przykładowa treść reklamy",
+        startDate: "2024-02-01",
+        endDate: "2024-12-31",
+      },
+      {
+        id: "4",
+        name: "Reklama 4",
+        content: "Inna przykładowa treść reklamy",
+        startDate: "2024-02-01",
+        endDate: "2024-12-31",
+      }
+    ];
+    setAdvertisements(exampleAdvertisements);
+    localStorage.setItem("advertisements", JSON.stringify(exampleAdvertisements));
+  };
+
   return (
     <Card>
-      <CardHeader title="Reklamy" titleTypographyProps={{ component: 'h1' }} />
+      <CardHeader title="Reklamy" titleTypographyProps={{ component: "h1" }} />
       <CardContent>
         {currentAdvertisements.length === 0 && (
           <Box textAlign="center" p={2}>
@@ -72,9 +107,13 @@ const AdvertisementsPage: React.FC = () => {
         <Button variant="contained" color="primary" onClick={handleOpenModal}>
           Dodaj nową reklamę
         </Button>
-         <Button variant="contained" color="success" onClick={() => alert("Funkcja w przygotowaniu")}>
-                Wygeneruj przykladowe dane
-              </Button>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() => loadSampleData()}
+        >
+          Wygeneruj przykladowe dane
+        </Button>
       </CardActions>
       <Modal open={isModalOpen} onClose={handleCloseModal}>
         <Box
@@ -89,7 +128,7 @@ const AdvertisementsPage: React.FC = () => {
             maxWidth: 600,
           }}
         >
-          <AdvertisementForm onAdd={handleAddAdvertisement} />
+          <AdvertisementForm onAdd={handleAddAdvertisement} currentAdvertisements={currentAdvertisements} />
         </Box>
       </Modal>
     </Card>

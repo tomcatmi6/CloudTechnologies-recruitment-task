@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Box, Typography, Button, Card, CardHeader, CardContent, CardActions } from "@mui/material";
+import { Typography, Button, Card, CardHeader, CardContent, CardActions } from "@mui/material";
 
 const ErrorPage: React.FC = () => (
   <Card

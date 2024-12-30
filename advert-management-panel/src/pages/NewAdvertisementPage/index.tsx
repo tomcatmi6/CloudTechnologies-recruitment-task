@@ -25,7 +25,7 @@ const NewAdvertisementPage: React.FC = () => {
       <Typography variant="h1" gutterBottom className="sr-only">
         Strona dodawania nowej Reklamy
       </Typography>
-      <AdvertisementForm onAdd={handleAddAdvertisementAction} />
+      <AdvertisementForm onAdd={handleAddAdvertisementAction} currentAdvertisements={currentAdvertisements}/>
     </Box>
   )
 };
