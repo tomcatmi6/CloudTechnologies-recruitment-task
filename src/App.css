@@ -2,14 +2,6 @@ body {
   background-color: #eee;
 }
 
-.quote-text {
-  font-size: 1.5em;
-  font-weight: 300;
-  color: #333;
-  margin: 0;
-  font-style: italic;
-}
-
 .sr-only {
   position: absolute;
   width: 1px;

@@ -5,7 +5,19 @@ import Quote from "../../components/Quote";
 
 const StartPage: React.FC = () => (
   <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-    <Typography variant="h1" align="center" gutterBottom>
+    <Typography
+      variant="h1"
+      align="center"
+      gutterBottom
+      sx={{
+        fontSize: {
+          xs: "1.6rem",
+          sm: "1.8rem",
+          md: "2.4rem",
+          xl: "3.2rem",
+        },
+      }}
+    >
       Witamy na stronie
     </Typography>
     <Quote />

@@ -33,8 +33,14 @@ const AdvertisementList: React.FC<Props> = ({
             bgcolor: "grey.200",
           },
         }}
-        secondaryAction={
-          <Box sx={{ display: "flex", gap: 1 }}>
+      >
+        <ListItemText
+          primary={ad.name}
+          secondary={`Start: ${changeISODateToReadable(
+            ad.startDate
+          )}, End: ${changeISODateToReadable(ad.endDate)}`}
+        />
+         <Box sx={{ display: "flex", gap: 1 }}>
             <Button
               variant="contained"
               color="primary"
@@ -50,14 +56,6 @@ const AdvertisementList: React.FC<Props> = ({
               Usuń
             </Button>
           </Box>
-        }
-      >
-        <ListItemText
-          primary={ad.name}
-          secondary={`Start: ${changeISODateToReadable(
-            ad.startDate
-          )}, End: ${changeISODateToReadable(ad.endDate)}`}
-        />
       </ListItem>
     ))}
   </List>

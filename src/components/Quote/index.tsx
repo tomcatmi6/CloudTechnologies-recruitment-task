@@ -18,7 +18,6 @@ const Quote: React.FC = () => {
         headers: { "X-Api-Key": "PzS4jWbRb2c0QYiEajuRUg==yuFB5FiyNhf7nuTK" },
       })
       .then((response) => {
-        console.log(response, "response");
         setQuote(response.data[0]);
         setLoading(false);
       })
@@ -30,10 +29,32 @@ const Quote: React.FC = () => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h2" align="center" className="quote-text">
+        <Typography
+          component="blockquote"
+          align="center"
+          sx={{
+            fontStyle: "italic",
+            fontSize: {
+              xs: "1rem",
+              sm: "1.1rem",
+              md: "1.2rem",
+              xl: "1.4rem",
+            },
+            fontWeight: 300,
+          }}
+        >
           {`"${quote?.quote}"`}
         </Typography>
-        <Typography align="right">{`Author: ${quote?.author}`}</Typography>
+        <Typography
+          component="p"
+          sx={{
+            fontSize: {
+              xs: "0.8rem",
+              xl: "1rem",
+            },
+          }}
+          align="right"
+        >{`Author: ${quote?.author}`}</Typography>
       </CardContent>
     </Card>
   );
