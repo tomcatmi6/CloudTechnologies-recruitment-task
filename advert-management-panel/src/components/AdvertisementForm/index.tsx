@@ -87,6 +87,7 @@ const AdvertisementForm: React.FC<Props> = ({onAdd}) => {
                 error={formik.touched.name && Boolean(formik.errors.name)}
                 helperText={formik.touched.name && formik.errors.name}
                 fullWidth
+                autoFocus
                 margin="normal"
               />
               <TextField

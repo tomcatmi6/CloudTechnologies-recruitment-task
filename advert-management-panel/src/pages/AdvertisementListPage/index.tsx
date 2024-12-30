@@ -72,6 +72,9 @@ const AdvertisementsPage: React.FC = () => {
         <Button variant="contained" color="primary" onClick={handleOpenModal}>
           Dodaj nową reklamę
         </Button>
+         <Button variant="contained" color="success" onClick={() => alert("Funkcja w przygotowaniu")}>
+                Wygeneruj przykladowe dane
+              </Button>
       </CardActions>
       <Modal open={isModalOpen} onClose={handleCloseModal}>
         <Box
