@@ -68,7 +68,7 @@ const AdvertisementsPage: React.FC = () => {
           onDelete={handleDelete}
         />
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ justifyContent: "center" }}>
         <Button variant="contained" color="primary" onClick={handleOpenModal}>
           Dodaj nową reklamę
         </Button>
